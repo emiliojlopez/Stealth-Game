@@ -1840,6 +1840,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8707612313135911802, guid: b69c23f4a01314c4aaf98d21f2e2087f,
+        type: 3}
+      propertyPath: MoveAction.m_SingletonActionBindings.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707612313135911802, guid: b69c23f4a01314c4aaf98d21f2e2087f,
+        type: 3}
+      propertyPath: MoveAction.m_SingletonActionBindings.Array.data[5].m_Id
+      value: 38b6c0ed-962a-4f27-8ece-f2e329153892
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707612313135911802, guid: b69c23f4a01314c4aaf98d21f2e2087f,
+        type: 3}
+      propertyPath: MoveAction.m_SingletonActionBindings.Array.data[5].m_Path
+      value: <Keyboard>/leftShift
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707612313135911802, guid: b69c23f4a01314c4aaf98d21f2e2087f,
+        type: 3}
+      propertyPath: MoveAction.m_SingletonActionBindings.Array.data[5].m_Action
+      value: Move
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

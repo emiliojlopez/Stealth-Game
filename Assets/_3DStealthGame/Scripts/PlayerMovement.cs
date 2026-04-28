@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed = 1.0f;
     public float turnSpeed = 20f;
+    public float sprintSpeed = 1.75f;
+    public bool isShiftHeld;
+    private float currentSpeed;
+    
 
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
@@ -22,7 +26,21 @@ public class PlayerMovement : MonoBehaviour
         m_Animator = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    void Update()
+    {
+        isShiftHeld = Input.GetKey(KeyCode.LeftShift);
+        // Check if sprinting
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = sprintSpeed;
+        }
+        else
+        {
+            currentSpeed = walkSpeed;
+        }
+    }
+
+        void FixedUpdate()
     {
         var pos = MoveAction.ReadValue<Vector2>();
 
@@ -32,15 +50,19 @@ public class PlayerMovement : MonoBehaviour
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize();
 
+
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
         bool isWalking = hasHorizontalInput || hasVerticalInput;
+        bool isSprinting = isShiftHeld && isWalking;
+        m_Animator.SetBool("IsSprinting", isSprinting);
         m_Animator.SetBool("IsWalking", isWalking);
+       
 
         Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
         m_Rotation = Quaternion.LookRotation(desiredForward);
 
         m_Rigidbody.MoveRotation(m_Rotation);
-        m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
+        m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * currentSpeed * Time.deltaTime);
     }
 }
